@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import aceEditorTest from '@/components/aceEditorTest'
 import Index from '@/page/index'
 import Pipeline from '@/page/pipeline'
+import PipelineAtom from '@/page/pipelineAtom'
 
 
 Vue.use(Router)
@@ -19,6 +20,10 @@ export default new Router({
         {
           path: '/pipeline',
           component: Pipeline
+        },
+        {
+          path: '/pipeline-atom',
+          component: PipelineAtom
         }
       ]
     }
