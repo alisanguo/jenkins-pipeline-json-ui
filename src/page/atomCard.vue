@@ -11,7 +11,7 @@
       </div> -->
       <div class="atom-card-body-content">
         <div class="atom-card-group">
-          <div class="atom-card-group-title">通用组件</div>
+         <!--  <div class="atom-card-group-title">通用组件</div> -->
           <div class="atom-card-group-content">
             <div v-for="(atom, index) in allAtomList" :key="index" @click="atomSelected(atom)" class="atom-card-atom">
               <div class="atom-left">

@@ -7,38 +7,7 @@ const ALL_PIPELINE_ATOM = [
     name: '卡中心代码规范检查',
     type: '系统预置原子',
     type_special: '通用原子',
-    parameters: [
-      {
-        id: 1,
-        name_en: 'SCAN_PATH',
-        name_cn: '扫描路径',
-        type: 'string',
-        form_item: 'input',
-        required: true,
-        default: '',
-        description: '代码规范检查扫描路径'
-      },
-      {
-        id: 2,
-        name_en: 'EXIT_AFTER_SCAN',
-        name_cn: '扫描后是否退出',
-        type: 'string',
-        form_item: 'select',
-        options: [
-        {
-          value: '是',
-          label: '是'
-        },
-        {
-          value: '否',
-          label: '否'
-        }],
-        required: true,
-        default: '是',
-        description: '扫描后是否退出'
-      }
-
-    ]
+    parameters: []
   },
   {
     id: 'ATOM-003',
@@ -46,37 +15,62 @@ const ALL_PIPELINE_ATOM = [
     status: 'active',
     version: 'master',
     name: '从版本控制检出',
-    type: '共享库原子',
+    type: '系统预置原子',
     type_special: '通用原子',
     parameters: [
       {
         id: 1,
-        name_en: '',
-        name_cn: '凭证',
+        name_en: 'scm',
+        name_cn: '检出脚本',
         type: 'string',
         form_item: 'input',
         required: true,
-        default: '',
-        description: '代码规范检查扫描路径'
+        default: "[$class: 'GitSCM', branches: [[name: env.GIT_BUILD_REF]],userRemoteConfigs: [[url: env.GIT_REPO_URL, credentialsId: env.CREDENTIALS_ID]]]",
+        description: '检出脚本',
+        is_visible: false,
+        is_literal: false
       },
       {
         id: 2,
-        name_en: 'EXIT_AFTER_SCAN',
-        name_cn: '扫描后是否退出',
+        name_en: 'changelog',
+        name_cn: 'changelog',
         type: 'string',
         form_item: 'select',
         options: [
         {
-          value: '是',
+          value: true,
           label: '是'
         },
         {
-          value: '否',
+          value: false,
           label: '否'
         }],
         required: true,
-        default: '是',
-        description: '扫描后是否退出'
+        default: true,
+        description: 'changelog',
+        is_visible: false,
+        is_literal: true
+      },
+      {
+        id: 2,
+        name_en: 'poll',
+        name_cn: 'poll',
+        type: 'string',
+        form_item: 'select',
+        options: [
+        {
+          value: true,
+          label: '是'
+        },
+        {
+          value: false,
+          label: '否'
+        }],
+        required: true,
+        default: true,
+        description: '更改日志',
+        is_visible: true,
+        is_literal: true
       }
 
     ]

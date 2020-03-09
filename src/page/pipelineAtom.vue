@@ -2,6 +2,9 @@
   <Collapse simple>
     <Panel>
       {{structData.name}}
+      <Tooltip class="step-delete-tooltip" placement="top-end" content="删除">
+        <Icon class="step-delete-icon" type="md-remove-circle" size="18" @click="deleteStep" />
+      </Tooltip>
       <p slot="content">
         <Form :model="argData">
           <FormItem v-for="(item,index) in structData.parameters" :key="index" :label="item.name_cn">
@@ -21,13 +24,19 @@
 </template>
 <script>
 import constant from '../utils/constant.js'
+
 export default {
   name: "pipelineAtom",
   props: {
     stepData: {
       type: Object,
       default: {}
+    },
+    stepIndex: {
+      type: Number,
+      default: 0
     }
+
   },
   data: () => {
     return {
@@ -38,7 +47,7 @@ export default {
     }
   },
   watch: {
-    
+
   },
   created() {
     this.init(this.stepData);
@@ -65,10 +74,26 @@ export default {
     },
     saveStepData() {
       this.$emit("dataChanged", this.stepData, this.argData);
+    },
+    deleteStep() {
+      this.$emit("deleteStep", this.stepIndex);
     }
+
   }
 }
 
 </script>
 <style>
+.step-delete-icon {
+  color: #808695;
+}
+
+.step-delete-tooltip {
+  float: right;
+}
+
+.step-delete-icon:hover {
+  color: #ed4014;
+}
+
 </style>
